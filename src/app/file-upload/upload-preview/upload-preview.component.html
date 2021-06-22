@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card header">
+        <h5>Upload Files</h5>
+    </div>
+    <div class="card-body">
+        <input type="file" name="myFile" id="myFile" (change)="onFileSelected($event)" #myFile>
+    </div>
+</div>
+
+<ng-template [ngIf]="isFileSelected">
+    <div class="card col-md-2">
+        <button class="btn btn-dark" (click)="onUpload()">Upload</button>
+    </div>
+</ng-template>
