@@ -32,7 +32,7 @@ export class DisplayService {
      query:this.getQuery,
      variables:{
       "orderBy": "MANUFACTURED_DATE_ASC",
-      "first": 5,
+      "first": 50,
       "offset": 0,
       "VehicleModel": "S"
      }

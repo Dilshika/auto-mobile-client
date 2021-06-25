@@ -1,29 +1,37 @@
-<button class="btn btn-primary" (click)="onClick()">Click</button>
-<table class="table table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Ca rMake</th>
-            <th scope="col">Car Model</th>
-            <th scope="col">VinNumber</th>
-            <th scope="col">Manufactured Date</th>
-            <th scope="col">Age</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let car of Vehicles">
-            <td>{{car.id}}</td>
-            <td>{{car.firstName}}</td>
-            <td>{{car.lastName}}</td>
-            <td>{{car.email}}</td>
-            <td>{{car.carMake}}</td>
-            <td>{{car.carModel}}</td>
-            <td>{{car.vinNumber}}</td>
-            <td>{{car.manufacturedDate}}</td>
-            <td>{{car.ageOfVehicle}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="card">
+    <div class="card-header">
+        Total Cars :{{total}}
+    </div>
+    <div class="card-body">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Car Make</th>
+                    <th scope="col">Car Model</th>
+                    <th scope="col">VinNumber</th>
+                    <th scope="col">Manufactured Date</th>
+                    <th scope="col">Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let car of Vehicles;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{car.id}}</td>
+                    <td>{{car.firstName}}</td>
+                    <td>{{car.lastName}}</td>
+                    <td>{{car.email}}</td>
+                    <td>{{car.carMake}}</td>
+                    <td>{{car.carModel}}</td>
+                    <td>{{car.vinNumber}}</td>
+                    <td>{{car.manufacturedDate}}</td>
+                    <td>{{car.ageOfVehicle}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
