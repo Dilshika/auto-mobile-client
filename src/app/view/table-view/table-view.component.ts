@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DisplayService } from 'src/app/_services/display.service';
 
 @Component({
   selector: 'app-table-view',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private displayService:DisplayService) { }
+
+  Vehicles:any[]=[];
 
   ngOnInit(): void {
+    
+  }
+
+  async onClick(){
+    await this.displayService.getVehicles()
+    .subscribe(
+      (data:any)=>{
+         this.Vehicles=data.data.getFilteredVehicles.nodes;
+        
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
+    await console.log(this.Vehicles)
+    
   }
 
 }

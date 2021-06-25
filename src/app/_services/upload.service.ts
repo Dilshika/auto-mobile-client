@@ -11,15 +11,20 @@ export class UploadService {
   
 
   //save files to browsers local storage
-  public uploadFile(chosenFile:File){
-    console.log(chosenFile);
-    return this.apollo.mutate({
-     mutation:gql`mutation uploadFile($file:Upload!){
-      uploadFile(file:$file){}
+  public uploadFile(chosenFile:any){
+    const query= this.apollo.mutate({
+     mutation:gql`
+     mutation uploadFile($file:Upload!){
+      uploadFile(file:$file){
+      }
      }`,
      variables:{
-      chosenFile
+       "file":chosenFile,
      }
+     
     })
+    console.log(query)
+    return query;
+    
   }
 }

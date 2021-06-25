@@ -7,7 +7,6 @@ import { UploadPreviewComponent } from './upload-preview/upload-preview.componen
 
 @NgModule({
   declarations: [
-    
     UploadPreviewComponent
   ],
   imports: [

@@ -5,6 +5,7 @@ import { UpdateButtonComponent } from './update-button/update-button.component';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,9 @@ import { ExportComponent } from './export/export.component';
     ExportComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule
+  ],
+  exports:[TableViewComponent]
 })
 export class ViewModule { }
