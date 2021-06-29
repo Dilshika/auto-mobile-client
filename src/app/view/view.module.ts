@@ -6,6 +6,9 @@ import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
 import { FormsModule } from '@angular/forms';
+import { BackButtonComponent } from './back-button/back-button.component';
+import { NextButtonComponent } from './next-button/next-button.component';
+import { ViewComponent } from './view/view.component';
 
 
 
@@ -15,12 +18,15 @@ import { FormsModule } from '@angular/forms';
     UpdateButtonComponent,
     DeleteButtonComponent,
     SearchComponent,
-    ExportComponent
+    ExportComponent,
+    BackButtonComponent,
+    NextButtonComponent,
+    ViewComponent
   ],
   imports: [
     CommonModule,
     FormsModule
   ],
-  exports:[TableViewComponent]
+  exports:[ViewComponent]
 })
 export class ViewModule { }

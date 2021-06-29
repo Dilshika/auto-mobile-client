@@ -1,8 +1,22 @@
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <app-back-button (sendValueEvent)="onBackClick($event)"></app-back-button>
+            </li>
+            <li class="page-item">
+                <app-next-button (sendEvent)="onNextClick($event)"></app-next-button>
+            </li>
+        </ul>
+    </nav>
+</div>
 <div class="card">
     <div class="card-header">
         Total Cars :{{total}}
     </div>
     <div class="card-body">
+
+
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -16,11 +30,13 @@
                     <th scope="col">VinNumber</th>
                     <th scope="col">Manufactured Date</th>
                     <th scope="col">Age</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let car of Vehicles;let i = index">
-                    <td>{{i+1}}</td>
+                    <td>{{i+1+offset}}</td>
                     <td>{{car.id}}</td>
                     <td>{{car.firstName}}</td>
                     <td>{{car.lastName}}</td>
@@ -30,6 +46,12 @@
                     <td>{{car.vinNumber}}</td>
                     <td>{{car.manufacturedDate}}</td>
                     <td>{{car.ageOfVehicle}}</td>
+                    <td>
+                        <app-delete-button [vehicleId]="car.id"></app-delete-button>
+                    </td>
+                    <td>
+                        <app-update-button></app-update-button>
+                    </td>
                 </tr>
             </tbody>
         </table>

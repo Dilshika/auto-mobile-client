@@ -27,18 +27,34 @@ export class DisplayService {
     }
   }
   `;
- public getVehicles(){
+ public getVehicles(first:number,offset:number){
    const Vehicles=this.apollo.query({
      query:this.getQuery,
      variables:{
       "orderBy": "MANUFACTURED_DATE_ASC",
-      "first": 50,
-      "offset": 0,
-      "VehicleModel": "S"
+      "first": first,
+      "offset": offset,
+      "VehicleModel": ""
      }
    })
    return Vehicles;
  };
 
- ;
+ deleteQuery=gql`
+ mutation delete($id:Int!){
+  deleteVehicle(id:$id){
+    id
+  }
+}
+  `
+
+  public deleteVehicles(id:number){
+    const output=this.apollo.mutate({
+      mutation:this.deleteQuery,
+      variables:{
+        "id":id
+      }
+    })
+    return output;
+  }
 }
