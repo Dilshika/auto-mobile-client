@@ -1,40 +1,43 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,OnDestroy,OnInit} from '@angular/core';
+import { UpdateVehicleInput } from 'src/app/model/update-vehicle.model';
 import { Vehicle } from 'src/app/model/vehicle.model';
-import { DisplayService } from 'src/app/_services/display.service';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-table-view',
   templateUrl: './table-view.component.html',
   styleUrls: ['./table-view.component.scss']
 })
-export class TableViewComponent implements OnInit {
+export class TableViewComponent implements OnInit,OnDestroy {
 
-  constructor(private displayService:DisplayService) { }
+  constructor(private displayService:DataService) { }
 
   vehicleId:number=0;
-  Vehicles:Vehicle[]=[];
+  Vehicles:any;
   total:number=0;
+  updateData:any;
+  result:any;
 
-   first:number=100;
-   offset:number=0;
-
+  first:number=100;
+  offset:number=0;
+  cars:any;
+  
   ngOnInit(): void {
     this.onLoad(this.first,this.offset);
   }
 
-  async onLoad(first:number,offset:number){
-    await this.displayService.getVehicles(first,offset)
-    .subscribe(
-      (data:any)=>{
-         this.Vehicles=data.data.getFilteredVehicles.nodes;
-        this.total=data.data.getFilteredVehicles.totalCount;
-        
-      },
-      (error)=>{
-        console.log(error);
-      }
-    );
-
+   async onLoad(first:number,offset:number){
+     
+      this.result=this.displayService.getVehicles(first, offset).subscribe(
+       async (data: any) => {
+         this.Vehicles = await data.data.getFilteredVehicles.nodes;
+         this.total = data.data.getFilteredVehicles.totalCount; 
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
+     
   }
 
   async onBackClick($event:number){
@@ -54,8 +57,25 @@ export class TableViewComponent implements OnInit {
     
   }
 
-  onDeleteClick(vehicle:number){
-    this.vehicleId=vehicle;
+  async onDeleteClick(vehicle:number){
+     this.vehicleId=await vehicle;
+     window.location.reload();
+  }
+
+  async onUpdateClick(id:number,vehicle:UpdateVehicleInput){
+    this.updateData=await [id,vehicle];
+    window.location.reload();
+  }
+ 
+  onClick(car:any){
+   car.selected=true;
+  }
+  onCancel(car:any){
+    this.cars={selected:false,car}
+  }
+
+  ngOnDestroy() {
+   this.result.unsubscribe();
   }
 
 }

@@ -27,6 +27,6 @@ import { ViewComponent } from './view/view.component';
     CommonModule,
     FormsModule
   ],
-  exports:[ViewComponent]
+  exports:[TableViewComponent]
 })
 export class ViewModule { }

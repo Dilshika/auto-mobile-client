@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from '@apollo/client/utilities';
 import { Apollo, gql } from 'apollo-angular';
+import { UpdateVehicleInput } from '../model/update-vehicle.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DisplayService {
+export class DataService {
 
   constructor(private apollo:Apollo) { }
 
@@ -37,6 +38,7 @@ export class DisplayService {
       "VehicleModel": ""
      }
    })
+
    return Vehicles;
  };
 
@@ -56,5 +58,31 @@ export class DisplayService {
       }
     })
     return output;
+  }
+
+  updateQuery=gql`
+  mutation update($id:Int!,$updateVehicleInput:UpdateVehicleInput!){
+    updateVehicle(id:$id,updateVehicleInput:$updateVehicleInput){
+      id
+      firstName
+       lastName
+       email
+       carMake
+       carModel
+       vinNumber
+       manufacturedDate
+       ageOfVehicle
+    }
+  }
+  `
+
+  public updateVehicles(id:number,vehicle:UpdateVehicleInput){
+    const response=this.apollo.mutate({
+      mutation:this.updateQuery,
+      variables:{
+        "id":id,
+        "updateVehicleInput":vehicle,
+      }
+    })
   }
 }
